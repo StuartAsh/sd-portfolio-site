@@ -15,7 +15,7 @@ type ModalMessageBoxProps = {
 
 export default function ModalMessageBox(props: ModalMessageBoxProps) {
   const headerRef = useRef(null);
-  const { width = 300, height = 200, startx = 0, starty = 0 } = props;
+  const { width = 300, height = 200, startx = 0, starty = 0} = props;
   
   const handleClick = () => {
     props.onClose();

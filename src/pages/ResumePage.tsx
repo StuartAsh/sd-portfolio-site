@@ -5,12 +5,12 @@ import SiteMenu from '../components/SiteMenu';
 function ResumePage() {
   return (
     <>
-      <div className='main-layout'>
-        <div className='side-bar'>
+      <div className='content-area'>
+        <div className='column column-fixed side-bar'>
           <SiteMenu isVisible={true} setIsVisible={() => {console.log('click')}} />
           &nbsp;
         </div>
-        <div className='main-window'>
+        <div className='column column-fluid'>
           <GlassPanel title={'Resume Page'} width="auto" height="auto" isVisible={true}>
             <div className="container">
                 <div className="header">

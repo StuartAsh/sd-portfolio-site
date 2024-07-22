@@ -5,11 +5,11 @@ import SiteMenu from '../components/SiteMenu';
 function AboutPage() {
   return (
     <>
-      <div className='main-layout'>
-        <div className='side-bar'>
+      <div className='content-area'>
+        <div className='column column-fixed side-bar'>
           <SiteMenu isVisible={true} setIsVisible={() => {console.log('click')}} />
         </div>
-        <div className='main-window'>
+        <div className='column column-fluid'>
           <GlassPanel title={'About Page'} width="auto" height="auto" isVisible={true}>
             <div className="container">
                 <div className="section">

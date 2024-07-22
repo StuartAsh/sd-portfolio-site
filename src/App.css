@@ -6,6 +6,11 @@ html {
   background-size: cover;
 }
 
+body {
+  margin: 0;
+  padding: 0;
+}
+
 .glass-modal {
   background: rgba(255, 255, 255, 0.5);
   -webkit-backdrop-filter: blur(5px);
@@ -13,7 +18,7 @@ html {
   border-radius: 10px;
   box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.4);
   border: 2px solid white;
-  z-index: 1010;
+  z-index: 900;
 }
 
 .blur-mask {
@@ -134,16 +139,13 @@ html {
 }
 
 .side-bar {
-  position: fixed;
-  top: 69px;
-  left: 10px;
-  z-index: 1000;
   width: 200px;
-  height: 100%;
+  z-index: 900;
   margin-right: 20px; /* Add some space between the side bar and the main window */
 }
 
 .side-bar ul {
+  display: flex;
   list-style-type: none;
   padding: 0;
   margin: 0;
@@ -179,3 +181,46 @@ html {
   height: 100%;
   margin-left: 220px; /* Add some space between the side bar and the main window */
 }
+
+.content-area {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 30px;
+}
+
+.column {
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.column-fixed {
+  flex: 0 0 200px;
+}
+
+.column-fluid {
+  flex: 1;
+}
+
+@media (max-width: 769px) {
+  .column {
+    flex-basis: 100%;
+    padding: 10px;
+  }
+
+  .side-bar li {
+    padding: 5px;
+    font-size: 16px;
+  }
+
+  .side-bar li a {
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.8);
+  }
+}
+
+@media (min-width: 769px) {
+  .side-bar ul {
+    display: grid;
+  }
+}
+
+
