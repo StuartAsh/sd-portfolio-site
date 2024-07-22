@@ -6,8 +6,8 @@ import GlassPanel from '../components/GlassPanel';
 function HomePage() {
   const [isVisible, setIsVisible] = useState(true);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 769);
-  const boxWidth = isMobile ? 300 : 600;
-  const boxHeight = isMobile ? 500 : 400;
+  const boxWidth = isMobile ? 310 : 600;
+  const boxHeight = isMobile ? 540 : 400;
 
   const messageText = 'With a career spanning over two decades, I have developed and maintained a wide variety of web and mobile applications, demonstrating a keen proficiency in JavaScript, React.js, Redux, Node.js, Python, SQL, and other modern technologies.';
  
