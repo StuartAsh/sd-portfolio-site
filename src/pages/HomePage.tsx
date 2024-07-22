@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import SiteMenu from '../components/SiteMenu';
 import ModalContentBox from '../components/ModalContentBox';
+import GlassPanel from '../components/GlassPanel';
 
 function HomePage() {
   const [isVisible, setIsVisible] = useState(true);
@@ -30,7 +31,31 @@ function HomePage() {
         <div className='column column-fixed side-bar'>
           <SiteMenu isVisible={isVisible} setIsVisible={setIsVisible} />
         </div>
-        <div className='column column-fluid'></div>
+        <div className='column column-fluid'>
+        <GlassPanel title={'Home Page'} width="auto" height="auto" isVisible={true}>
+          <div className='container'>
+            <div className='section'>
+              <p>Welcome to my portfolio. This site showcases not only my work but also my technical skills in action. Built from the ground up using React.js and TypeScript, it demonstrates my proficiency in modern web development technologies.</p> 
+              <h3>Key features include:</h3>
+              <ul className='bullets'>
+                <li>Custom-built React components</li>
+                <li>Hand-crafted CSS and HTML</li>
+                <li>Full responsiveness for optimal viewing across all devices</li>
+                <li>Clean, efficient codebase leveraging TypeScript's advantages</li>
+              </ul>
+
+              <p>This project reflects my commitment to creating high-quality, performant web applications. Feel free to explore and get a firsthand look at my development capabilities.</p>
+              <h3>Section Overview:</h3>
+              <ul>
+                <li><strong>About:</strong> This page is a brief overview of my career.</li>
+                <li><strong>Resume:</strong> This page contains my full resume.</li>
+                <li><strong>GitHub:</strong> This is an external link to my GitHub page.</li>
+                <li><strong>LinkedIn:</strong> This is an external link to my LinkedIn profile.</li>
+              </ul>
+            </div>
+          </div>
+        </GlassPanel>
+        </div>
       </div>
     {isVisible && 
       <div className='blur-mask'>&nbsp;</div>

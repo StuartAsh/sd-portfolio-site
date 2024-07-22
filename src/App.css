@@ -201,6 +201,11 @@ body {
   flex: 1;
 }
 
+.section ul.bullets {
+  list-style-type: disc;
+  margin-left: 15px;
+}
+
 @media (max-width: 769px) {
   .column {
     flex-basis: 100%;
