@@ -29,54 +29,6 @@ function AboutPage() {
                       <li><strong>Real-Time Internet Applications:</strong> Proficient in developing E-Commerce applications, web-based portals, and intranet/extranet systems.</li>
                   </ul>
                   
-                  <h2>Professional Experience:</h2>
-                  
-                  <h3>Wayfair Inc (2021-2023):</h3>
-                  <ul>
-                      <li>As a Full Stack Developer, Stuart played a crucial role in developing and maintaining internal React applications, creating GraphQL endpoints, and managing data storage using Postgres and Neo4J.</li>
-                  </ul>
-                  
-                  <h3>Fruit Street Health (2020-2021):</h3>
-                  <ul>
-                      <li>Led a team to create and maintain ReactJS applications, developed a telehealth application integrating Zoom SDK, and managed back-end services with Node.js and MongoDB.</li>
-                  </ul>
-                  
-                  <h3>VoiceBase (2019-2020):</h3>
-                  <ul>
-                      <li>Focused on developing ReactJS applications and creating an analytics portal with various dashboards.</li>
-                  </ul>
-                  
-                  <h3>Bank of America/Apex Systems (2017-2018):</h3>
-                  <ul>
-                      <li>Improved UI for internal applications, working with Python/Flask on the back-end and JavaScript/jQuery on the front-end.</li>
-                  </ul>
-                  
-                  <h3>Healthline Inc (2014-2017):</h3>
-                  <ul>
-                      <li>Designed and developed UI for healthline.com and its mobile apps, working with AngularJS and iOS Swift.</li>
-                  </ul>
-                  
-                  <h3>Triporati (2011-2014):</h3>
-                  <ul>
-                      <li>Designed and developed UI for the Triporati website, including co-branded sites with major partners.</li>
-                  </ul>
-                  
-                  <h3>Walmart.com (2004-2011):</h3>
-                  <ul>
-                      <li>Developed UI and server-side software for high-volume e-commerce applications, using Java and Struts framework.</li>
-                  </ul>
-                  
-                  <h3>Providian Financial (2001-2004):</h3>
-                  <ul>
-                      <li>Led multiple projects, developed e-commerce systems, and provided application support, utilizing Java and SQL.</li>
-                  </ul>
-                  
-                  <h2>Education:</h2>
-                  <ul>
-                      <li><strong>Drake High School, San Anselmo, CA</strong></li>
-                      <li><strong>College of Marin, Kentfield, CA:</strong> Majored in Computer Science</li>
-                  </ul>
-                  
                   <p>Stuart's career is marked by a consistent record of delivering high-quality, user-focused solutions across various industries, including e-commerce, healthcare, and finance. His technical expertise, combined with leadership experience, makes him a valuable asset to any development team.</p>
                 </div>
             </div>

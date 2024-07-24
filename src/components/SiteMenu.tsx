@@ -1,6 +1,7 @@
 import { NavLink } from "react-router-dom";
 import GlassPanel from "./GlassPanel";
-import { useEffect, useState } from "react";
+import { useContext } from "react";
+import { MobileContext } from "../main";
 
 type SiteMenuProps = {
   isVisible: boolean;
@@ -8,25 +9,16 @@ type SiteMenuProps = {
 };
 
 export default function SiteMenu({isVisible, setIsVisible}: SiteMenuProps) {
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 769);
+  const isMobile = useContext(MobileContext);
   const width = isMobile ? '100%' : '200px';
-  const height = isMobile ? '120px' : '400px';
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  const height = isMobile ? 'fit-content' : '400px';
 
   function handleClick() {
     setIsVisible(true);
   }
 
   return (
-      <GlassPanel title="Site Menu" width={width} height={height} isVisible={true}>
+      <GlassPanel title="" width={width} height={height} isVisible={true}>
         <ul>
           <li><NavLink className={({isActive}) => isActive ? 'activeLink' : ''} to="/">Home</NavLink></li>
           <li><NavLink className={({isActive}) => isActive ? 'activeLink' : ''} to="/about">About</NavLink></li>

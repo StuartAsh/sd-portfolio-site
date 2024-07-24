@@ -1,11 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import SiteMenu from '../components/SiteMenu';
 import ModalContentBox from '../components/ModalContentBox';
 import GlassPanel from '../components/GlassPanel';
+import { MobileContext } from '../main';
 
 function HomePage() {
   const [isVisible, setIsVisible] = useState(true);
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 769);
+  const isMobile = useContext(MobileContext);
   const boxWidth = isMobile ? 310 : 600;
   const boxHeight = isMobile ? 540 : 400;
 
@@ -14,16 +15,7 @@ function HomePage() {
   const startx = window.innerWidth / 2 - boxWidth / 2;
   const starty = window.innerHeight / 2 - boxHeight / 2;
 
-  const welcomeText = isMobile ? 'Welcome':'Welcome to Stuart Dodgshon\'s Portfolio';
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  const welcomeText = isMobile ? 'Welcome':'Welcome to my website.';
 
   return (
     <>
@@ -35,13 +27,13 @@ function HomePage() {
         <GlassPanel title={'Home Page'} width="auto" height="auto" isVisible={true}>
           <div className='container'>
             <div className='section'>
-              <p>Welcome to my portfolio. This site showcases not only my work but also my technical skills in action. Built from the ground up using React.js and TypeScript, it demonstrates my proficiency in modern web development technologies.</p> 
+              <p>This site is a living example of my web development skills, crafted with React.js and TypeScript. It offers a glimpse into my projects while showcasing my expertise in cutting-edge technologies. Explore to see both my work and my technical abilities in action.</p> 
               <h3>Key features include:</h3>
               <ul className='bullets'>
                 <li>Custom-built React components</li>
                 <li>Hand-crafted CSS and HTML</li>
                 <li>Full responsiveness for optimal viewing across all devices</li>
-                <li>Clean, efficient codebase leveraging TypeScript's advantages</li>
+                <li>Clean, efficient codebase</li>
               </ul>
 
               <p>This project reflects my commitment to creating high-quality, performant web applications. Feel free to explore and get a firsthand look at my development capabilities.</p>

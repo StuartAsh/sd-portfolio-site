@@ -1,9 +1,12 @@
-function MenuBar() {
+import { useContext } from "react";
+import { MobileContext } from "../main";
 
+function MenuBar() {
+  const isMobile = useContext(MobileContext);
   return (
     <>
       <div className='glass-modal menu-bar'>
-        <span>Stuart Dodgshon's Portfolio</span>
+        <span>{isMobile ? 'Stuart Dodgshon Web Developer': 'Stuart Dodgshon | Full Stack/UI developer'}</span>
       </div>
       
     </>
