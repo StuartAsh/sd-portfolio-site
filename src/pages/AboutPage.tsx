@@ -13,11 +13,11 @@ function AboutPage() {
           <GlassPanel title={'About Page'} width="auto" height="auto" isVisible={true}>
             <div className="container">
                 <div className="section">
-                  <h1>Stuart Dodgshon:</h1>
+                  <h2>Stuart Dodgshon:</h2>
                   <p>Stuart lives in San Rafael, California. His hobbies include playing the guitar and piano, as well as hiking, kayaking, and exploring new places. He also writes fiction novels in his spare time.</p>
                 </div>
                 <div className="section">
-                  <h1>Career Overview:</h1>
+                  <h2>Career Overview:</h2>
                   
                   <p>Stuart is a seasoned Full Stack Developer with a robust portfolio of skills and extensive experience in both front-end and back-end development. With a career spanning over two decades, Stuart has developed and maintained a wide variety of web and mobile applications, demonstrating a keen proficiency in JavaScript, React.js, Redux, Node.js, Python, SQL, and other modern technologies.</p>
                   
