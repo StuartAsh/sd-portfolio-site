@@ -31,6 +31,16 @@ function ResumePage() {
                 <div className="experience section">
                     <h2>EXPERIENCE</h2>
                     <ul>
+                    <li>
+                            <h3>AI Notes - Full Stack Developer</h3>
+                            <p><strong>February 2024 to August 2024</strong></p>
+                            <p>This is a personal project to create an LLM generative AI driven notes app. Ask me for a
+                            demonstration.</p>
+                            <p>This app was developed using the Open AI API, React JS frontend and NodeJS Express
+                            backend.</p>
+                            <p>Uses a combination of Prompt engineering, LLM analysis, and JSON template parsing to
+                            expand and enrich basic notes into fully researched and organized articles.</p>
+                        </li>
                         <li>
                             <h3>Wayfair Inc, Remote - Full Stack Developer</h3>
                             <p><strong>June 2021 to September 2023</strong></p>

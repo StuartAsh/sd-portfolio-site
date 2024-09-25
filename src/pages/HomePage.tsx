@@ -27,7 +27,7 @@ function HomePage() {
         <GlassPanel title={'Home Page'} width="auto" height="auto" isVisible={true}>
           <div className='container'>
             <div className='section'>
-              <p>This site is a living example of my web development skills, crafted with React.js and TypeScript. It offers a glimpse into my projects while showcasing my expertise in cutting-edge technologies. Explore to see both my work and my technical abilities in action.</p> 
+              <p>This site is an example of my web development skills, crafted with React.js and TypeScript. It offers a glimpse into my projects while showcasing my expertise in cutting-edge technologies. Explore to see both my work and my technical abilities in action.</p> 
               <h3>Key features include:</h3>
               <ul className='bullets'>
                 <li>Custom-built React components</li>
