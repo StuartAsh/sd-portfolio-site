@@ -1,0 +1,289 @@
+html, body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+}
+
+#root {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.app-container {
+  width: calc(100% - 40px);
+  max-width: 1280px;
+  height: 90vh;
+  margin: 50px auto 20px auto;
+  display: flex;  /* Make app-container a flex container */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.panel {
+  background: rgba(255, 255, 255, 0.4);
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+  border-radius: 10px;
+  display: flex; 
+  width: 100%;
+  height: 100%;
+  /* box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.4); */
+}
+
+.panel-border {
+  background-color: rgba(256, 256, 256, 0.3);
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+  display: flex;
+  width: 100%;
+  height: 100%;
+  border: 2px solid white;
+  border-radius: 15px;
+  padding: 5px;
+  box-shadow: 10px 10px 4px rgba(0, 0, 0, 0.4);
+}
+.colOne {
+  width: 364px;
+  min-width: 364px;
+  flex-shrink: 0;  /* Prevent colOne from shrinking */
+  border-radius: 10px 0 0 10px;
+  height: 100%; /* Full height of the parent container */
+  background-color: rgba(256, 256, 256, 0.7);
+}
+
+.colTwo {
+  flex-grow: 1;
+  flex-basis: 0;  /* Allow colTwo to shrink below its content size */
+  min-width: 0;  /* Allow colTwo to shrink below its content size */
+  border-radius: 0 10px 10px 0;
+  height: 100%; /* Full height of the parent container */
+  color:#333;
+}
+
+.app-container {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  .add-todo {
+    padding: 0px 10px 10px 10px;
+    color: #333;
+  
+    h1 {
+      font-size: 40px;
+      line-height: 1.4;
+      border-bottom: 1px solid #333;
+      margin-top: 4px;
+      margin-bottom: 5px;
+    }
+
+    h2 {
+      font-size: 26px;
+      margin-bottom: 2px;
+      color: black;
+      margin-block-end: 0.73em;
+      margin-block-start: 2em;
+    }
+  
+    .add-todo {
+      display: flex;
+      align-items: center; /* Center items vertically */
+    }
+    
+    .add-todo input {
+      font-size: 24px;
+      color: #333;
+      padding: 4px 8px;
+      margin-right: 5px; /* Add space between input and button */
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      background-color: #c0e1b3;
+    }
+  
+    .add-todo input:hover {
+      box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.4);
+    }
+  
+    .add-todo input:focus {
+      outline: none;
+      box-shadow: inset 3px 3px 5px rgba(0, 0, 0, 0.4);
+    }
+
+    .home-button { 
+      float: right;
+      button {
+        font-size: 18px;
+        color: #fff;
+        background-color: #1e8c2f;
+        border: none;
+        border-radius: 5px;
+        padding: 3px 6px;
+        width: 90px;
+      }
+
+      button:hover {
+        background-color: #26b63a;
+        cursor: pointer;
+      }
+    }
+    
+    .add-todo button {
+      padding: 4px 8px; /* Match the padding with the input */
+      font-size: 24px;
+      color: #fff;
+      background-color: #1e8c2f;
+      border: none;
+      border-radius: 5px;
+    }
+  
+    .add-todo button:hover {
+      background-color: #26b63a;
+      cursor: pointer;
+    }
+    
+    .add-todo button:focus {
+      outline: none;
+    }
+  
+    .sub-title {
+      font-size: 20px;
+      margin-top: 10px;
+    }
+  }
+  
+  .todo-list {
+    margin-left: 0px;
+    padding: 10px;
+    margin-top: 0;
+  }
+  
+  .todo-list-container {
+    overflow: auto;
+    height: 100%;
+  }
+  
+  .todo-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 8px;
+    border-bottom: 1px solid #ccc;
+    box-sizing: border-box;
+  }
+  
+  .todo-item:first-child {
+    border-radius: 0 10px 0 0;
+  }
+  
+  .todo-item:last-child {
+    border-radius: 0 0 10px 0;
+  }
+  
+  .todo-item:nth-child(odd) {
+    background-color: rgba(256,256,256,0.4); /* Light gray for odd rows */
+  }
+  
+  .todo-item:nth-child(even) {
+    background-color: rgba(0, 150, 0, 0.1); /* Slightly darker gray for even rows */
+  }
+  
+  .todo-item input[type="checkbox"] {
+    margin-right: 8px;
+    margin-left: 10px;
+    -webkit-appearance: none; /* Remove default appearance on WebKit */
+    -moz-appearance: none; /* Remove default appearance on Firefox */
+    appearance: none; /* Remove default appearance */
+    width: 22px;
+    height: 22px;
+    background-color: #c0e1b3; /* Set background color */
+    border: 1px solid #000;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  
+  .todo-item input[type="checkbox"]:checked {
+    background-color: #1e8c2f; /* Set background color when checked */
+    content: '✔'; /* Optional: Add a checkmark */
+    color: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .todo-item span {
+    flex-grow: 1;
+    text-align: left;
+    margin-right: 8px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 20px;
+  }
+  
+  .todo-item button {
+    flex-shrink: 0;
+    background-color: #1e8c2f;
+    border-radius: 5px;
+    color: white;
+    border: none;
+    padding: 4px 8px;
+    font-size: 14px;
+  }
+  
+  .todo-item button:hover {
+    background-color: #26b63a;
+    cursor: pointer;
+  }  
+}
+
+/* Media query for mobile devices */
+@media screen and (max-width: 768px) {
+  .app-container {
+    width: calc(100% - 20px);
+    height: 90vh;
+    margin: 10px;
+    margin-top: 50px;
+  }
+
+  .panel-border, .panel {
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .colOne, .colTwo {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .colOne {
+    border-radius: 10px 10px 0 0;
+    height: auto;
+    flex-shrink: 0;
+  }
+
+  .colTwo {
+    border-radius: 0 0 10px 10px;
+    flex-grow: 1;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .app-container {
+    .todo-list-container {
+      flex-grow: 1;
+      overflow-y: auto;
+    }
+  
+    .add-todo input {
+      width: calc(70% - 10px);
+      margin-right: 10px;
+    }
+  
+    .add-todo button {
+      width: 30%;
+    }
+  }
+}

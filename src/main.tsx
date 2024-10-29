@@ -7,6 +7,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import MenuBar from './components/MenuBar.tsx';
 import ResumePage from './pages/ResumePage.tsx';
 import AboutPage from './pages/AboutPage.tsx';
+import TodoApp from './pages/TodoApp.tsx';
 
 export const MobileContext = createContext(false);
 
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
   { 
     path: '/about', 
     element: <AboutPage />
+  },
+  { 
+    path: '/todo', 
+    element: <TodoApp />
   },
 ]);
 

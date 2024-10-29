@@ -23,6 +23,7 @@ export default function SiteMenu({isVisible, setIsVisible}: SiteMenuProps) {
           <li><NavLink className={({isActive}) => isActive ? 'activeLink' : ''} to="/">Home</NavLink></li>
           <li><NavLink className={({isActive}) => isActive ? 'activeLink' : ''} to="/about">About</NavLink></li>
           <li><NavLink className={({isActive}) => isActive ? 'activeLink' : ''} to="/resume">Resume</NavLink></li>
+          <li><NavLink className={({isActive}) => isActive ? 'activeLink' : ''} to="/todo">Todo App</NavLink></li>
           <li><a href="https://github.com/StuartAsh" target="_new">GitHub page</a></li>
           <li><a href="https://www.linkedin.com/in/stuart-dodgshon/" target="_new">LinkedIn profile</a></li>
         </ul>
