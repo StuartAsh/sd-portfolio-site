@@ -68,9 +68,15 @@ body {
 }
 
 .app-container {
+  width: calc(100% - 40px);
+  max-width: 1280px;
+  height: 90vh;
+  margin: 50px auto 20px auto;
+  display: flex;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
   .add-todo {
-    padding: 0px 10px 10px 10px;
+    padding: 0px 30px 10px 10px;
     color: #333;
   
     h1 {
@@ -91,17 +97,21 @@ body {
   
     .add-todo {
       display: flex;
-      align-items: center; /* Center items vertically */
+      align-items: center;
+      gap: 10px; /* Use gap instead of margin for consistent spacing */
+      width: 100%; /* Ensure the container takes full width */
     }
     
     .add-todo input {
+      flex: 1; /* Allow input to grow but maintain proportions */
+      max-width: calc(100% - 100px); /* Prevent input from pushing button too far */
       font-size: 24px;
       color: #333;
       padding: 4px 8px;
-      margin-right: 5px; /* Add space between input and button */
       border-radius: 5px;
       border: 1px solid #ccc;
       background-color: #c0e1b3;
+      box-sizing: border-box; /* Include padding in width calculation */
     }
   
     .add-todo input:hover {
@@ -132,12 +142,14 @@ body {
     }
     
     .add-todo button {
-      padding: 4px 8px; /* Match the padding with the input */
+      padding: 4px 8px;
       font-size: 24px;
       color: #fff;
       background-color: #1e8c2f;
       border: none;
       border-radius: 5px;
+      width: 90px; /* Set fixed width for consistency */
+      flex-shrink: 0; /* Prevent button from shrinking */
     }
   
     .add-todo button:hover {
@@ -147,11 +159,6 @@ body {
     
     .add-todo button:focus {
       outline: none;
-    }
-  
-    .sub-title {
-      font-size: 20px;
-      margin-top: 10px;
     }
   }
   
@@ -185,30 +192,30 @@ body {
   }
   
   .todo-item:nth-child(odd) {
-    background-color: rgba(256,256,256,0.4); /* Light gray for odd rows */
+    background-color: rgba(256,256,256,0.4);
   }
   
   .todo-item:nth-child(even) {
-    background-color: rgba(0, 150, 0, 0.1); /* Slightly darker gray for even rows */
+    background-color: rgba(0, 150, 0, 0.1);
   }
   
   .todo-item input[type="checkbox"] {
     margin-right: 8px;
     margin-left: 10px;
-    -webkit-appearance: none; /* Remove default appearance on WebKit */
-    -moz-appearance: none; /* Remove default appearance on Firefox */
-    appearance: none; /* Remove default appearance */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
     width: 22px;
     height: 22px;
-    background-color: #c0e1b3; /* Set background color */
+    background-color: #c0e1b3;
     border: 1px solid #000;
     border-radius: 50%;
     cursor: pointer;
   }
   
   .todo-item input[type="checkbox"]:checked {
-    background-color: #1e8c2f; /* Set background color when checked */
-    content: '✔'; /* Optional: Add a checkmark */
+    background-color: #1e8c2f;
+    content: '✔';
     color: #000;
     display: flex;
     align-items: center;
@@ -271,19 +278,23 @@ body {
     display: flex;
     flex-direction: column;
   }
+
   .app-container {
     .todo-list-container {
       flex-grow: 1;
       overflow-y: auto;
     }
-  
-    .add-todo input {
-      width: calc(70% - 10px);
-      margin-right: 10px;
+
+    .add-todo .add-todo {
+      gap: 8px; /* Slightly smaller gap on mobile */
     }
-  
+    
+    .add-todo input {
+      max-width: calc(100% - 95px); /* Adjust for mobile */
+    }
+    
     .add-todo button {
-      width: 30%;
+      width: 85px; /* Slightly smaller button on mobile */
     }
   }
 }
