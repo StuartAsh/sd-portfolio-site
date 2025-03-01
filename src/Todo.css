@@ -347,7 +347,7 @@ body {
   .todo-item {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     width: 100%;
     padding: 8px;
     border-bottom: 1px solid #ccc;
@@ -376,12 +376,15 @@ body {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
+    min-width: 22px;
     width: 22px;
+    min-height: 22px;
     height: 22px;
     background-color: #c0e1b3;
     border: 1px solid #000;
     border-radius: 50%;
     cursor: pointer;
+    flex-shrink: 0;
   }
   
   .todo-item input[type="checkbox"]:checked {
@@ -399,6 +402,8 @@ body {
     margin-right: 8px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 20px;
+    word-break: break-word;
+    padding: 1px 0;
   }
   
   .todo-item button {
@@ -409,6 +414,8 @@ body {
     border: none;
     padding: 4px 8px;
     font-size: 14px;
+    margin-top: 2px;
+    align-self: flex-start;
   }
   
   .todo-item button:hover {
