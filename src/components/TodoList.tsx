@@ -42,7 +42,7 @@ export default function TodoList({ todos, currentListId, updateTodoLists }: Todo
         <li key={todo.id} className='todo-item'>
           <input type="checkbox" checked={todo.completed} onChange={() => handleToggleTodo(todo.id)} />
           <span>{todo.text}</span>
-            <button onClick={() => handleDeleteTodo(todo.id)}>Delete</button>
+          <button className="delete-todo-icon" onClick={() => handleDeleteTodo(todo.id)} title="Delete Todo">×</button>
         </li>
       ))}
       </ul>

@@ -406,26 +406,41 @@ body {
     padding: 1px 0;
   }
   
-  .todo-item button {
+  .delete-todo-icon {
     flex-shrink: 0;
-    background-color: #1e8c2f;
-    border-radius: 5px;
+    width: 32px;
+    height: 32px;
+    background-color: #d23f3f;
     color: white;
     border: none;
-    padding: 4px 8px;
-    font-size: 14px;
-    margin-top: 2px;
+    border-radius: 5px;
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    margin-top: 0;
     align-self: flex-start;
   }
   
-  .todo-item button:hover {
-    background-color: #26b63a;
+  .delete-todo-icon:hover {
+    background-color: #e04f4f;
     cursor: pointer;
   }  
 }
 
 /* Media query for mobile devices */
+/* Make delete-todo-icon slightly smaller on mobile */
 @media screen and (max-width: 768px) {
+  .delete-todo-icon {
+    width: 30px;
+    height: 30px;
+    font-size: 22px;
+  }
+  
   .app-container {
     width: calc(100% - 20px);
     height: 90vh;
