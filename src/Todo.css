@@ -331,6 +331,12 @@ body {
     border-bottom: 1px solid #ccc;
     padding-bottom: 5px;
   }
+  
+  .todo-list-header {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
 
   .todo-list-empty {
     display: flex;
@@ -350,9 +356,10 @@ body {
   }
   
   .todo-list-container {
-    height: calc(100% - 50px);
+    height: calc(100% - 45px); /* Reduced to account for just the header */
     position: relative;
     overflow: hidden;
+    flex: 1;
   }
   
   .todo-list-scroller {
@@ -521,9 +528,10 @@ body {
   .app-container {
     .todo-list-container {
       flex-grow: 1;
-      height: 100%;
+      height: calc(100% - 40px); /* Adjusted for mobile header */
       position: relative;
       overflow: hidden;
+      flex: 1;
     }
     
     .todo-list-scroller {
@@ -547,6 +555,22 @@ body {
       gap: 8px; /* Slightly smaller gap on mobile */
       margin-right: 6px; /* Prevent button from being cut off */
       width: calc(100% - 6px); /* Adjust width to account for margin */
+    }
+    
+    .todo-item {
+      padding: 6px; /* Make list items more compact on mobile */
+    }
+    
+    .todo-list-header {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+    
+    .todo-list-header h2 {
+      font-size: 20px;
+      margin: 5px 0 5px 15px;
+      padding-bottom: 2px;
     }
     
     .add-todo input {
@@ -666,6 +690,16 @@ body {
   .todo-list-header h2 {
     font-size: 20px !important;
     margin: 5px 0 5px 15px !important;
+  }
+  
+  .todo-list-header {
+    display: flex !important;
+    flex-direction: column !important;
+    height: 100% !important;
+  }
+  
+  .todo-item {
+    padding: 6px !important; /* Make list items more compact */
   }
   
   .list-selector, .add-todo .add-todo, .add-list-form {
