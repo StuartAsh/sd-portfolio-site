@@ -77,8 +77,8 @@ body {
 .app-container {
   width: calc(100% - 40px);
   max-width: 1280px;
-  height: 90vh;
-  margin: 50px auto 20px auto;
+  height: 85vh; /* Reduced height to leave space at bottom */
+  margin: 60px auto 20px auto; /* Increased top margin for spacing from header */
   display: flex;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   box-sizing: border-box;
@@ -345,12 +345,16 @@ body {
     margin-left: 0px;
     padding: 10px;
     margin-top: 0;
+    position: relative;
+    -webkit-transform: translateZ(0); /* Hardware acceleration for iOS */
   }
   
   .todo-list-container {
-    overflow-y: auto;
+    overflow-y: scroll; /* Use scroll instead of auto for iOS */
     height: calc(100% - 50px);
     -webkit-overflow-scrolling: touch; /* Improve scrolling on iOS */
+    overscroll-behavior: contain; /* Prevent scroll chaining */
+    touch-action: pan-y; /* Only allow vertical scrolling */
   }
   
   .todo-item {
@@ -452,10 +456,11 @@ body {
   
   .app-container {
     width: calc(100% - 20px);
-    height: 90vh;
-    max-height: 90vh; /* Ensure it doesn't exceed viewport height */
+    height: 80vh;
+    max-height: 80vh; /* Reduced height to ensure space at bottom */
     margin: 10px;
-    margin-top: 20px;
+    margin-top: 40px; /* Increased to avoid overlap with header */
+    margin-bottom: 20px; /* Added bottom margin */
     position: relative;
     overflow: hidden; /* Prevent overflow issues */
     box-sizing: border-box;
@@ -494,12 +499,19 @@ body {
     -webkit-overflow-scrolling: touch; /* Improve scrolling on iOS */
     width: 100% !important;
     box-sizing: border-box;
+    touch-action: pan-y; /* Only allow vertical scrolling */
+    position: relative; /* Create a stacking context */
   }
 
   .app-container {
     .todo-list-container {
       flex-grow: 1;
-      overflow-y: auto;
+      overflow-y: scroll;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior: contain;
+      touch-action: pan-y;
+      height: 100%;
+      position: relative;
     }
 
     .add-todo .add-todo {
@@ -604,9 +616,10 @@ body {
   }
 
   .app-container {
-    margin-top: 5px !important;
-    height: 90vh !important;
-    max-height: 90vh !important;
+    margin-top: 40px !important; /* Increased for header space */
+    margin-bottom: 20px !important;
+    height: 75vh !important; /* Reduced height */
+    max-height: 75vh !important;
     box-sizing: border-box !important;
     overflow: hidden !important;
   }
