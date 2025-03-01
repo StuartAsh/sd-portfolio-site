@@ -75,6 +75,42 @@ body {
   display: flex;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 
+  .app-header {
+    padding: 0px 30px 0px 10px;
+    color: #333;
+  
+    h1 {
+      font-size: 40px;
+      line-height: 1.4;
+      border-bottom: 1px solid #333;
+      margin-top: 4px;
+      margin-bottom: 5px;
+    }
+
+    .sub-title {
+      font-size: 18px;
+      color: #555;
+    }
+
+    .home-button { 
+      float: right;
+      button {
+        font-size: 18px;
+        color: #fff;
+        background-color: #1e8c2f;
+        border: none;
+        border-radius: 5px;
+        padding: 3px 6px;
+        width: 90px;
+      }
+
+      button:hover {
+        background-color: #26b63a;
+        cursor: pointer;
+      }
+    }
+  }
+
   .add-todo {
     padding: 0px 30px 10px 10px;
     color: #333;
@@ -161,6 +197,129 @@ body {
       outline: none;
     }
   }
+
+  /* List management styles */
+  .list-controls {
+    padding: 20px 30px 5px 10px;
+    color: #333;
+  }
+
+  .list-selector {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+  }
+
+  .list-selector select {
+    flex: 1;
+    font-size: 18px;
+    padding: 6px 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #c0e1b3;
+    color: #333;
+  }
+
+  .list-selector select:focus {
+    outline: none;
+    box-shadow: inset 3px 3px 5px rgba(0, 0, 0, 0.4);
+  }
+
+  .list-selector button {
+    background-color: #d23f3f;
+    color: white;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  .list-selector button:hover {
+    background-color: #e04f4f;
+  }
+
+  .add-list-button {
+    width: 100%;
+    padding: 6px 10px;
+    background-color: #1e8c2f;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 5px;
+  }
+
+  .add-list-button:hover {
+    background-color: #26b63a;
+  }
+
+  .add-list-form {
+    display: flex;
+    gap: 5px;
+    margin-top: 5px;
+  }
+
+  .add-list-form input {
+    flex: 1;
+    font-size: 16px;
+    padding: 6px 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #c0e1b3;
+  }
+
+  .add-list-form input:focus {
+    outline: none;
+    box-shadow: inset 3px 3px 5px rgba(0, 0, 0, 0.4);
+  }
+
+  .add-list-form button:first-of-type {
+    background-color: #1e8c2f;
+    color: white;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  .add-list-form button:first-of-type:hover {
+    background-color: #26b63a;
+  }
+
+  .add-list-form button:last-of-type {
+    background-color: #d23f3f;
+    color: white;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  .add-list-form button:last-of-type:hover {
+    background-color: #e04f4f;
+  }
+
+  .todo-list-header h2 {
+    margin: 10px 0 5px 15px;
+    color: #333;
+    font-size: 26px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 5px;
+  }
+
+  .todo-list-empty {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    color: #777;
+    font-size: 18px;
+  }
   
   .todo-list {
     margin-left: 0px;
@@ -170,7 +329,7 @@ body {
   
   .todo-list-container {
     overflow: auto;
-    height: 100%;
+    height: calc(100% - 50px);
   }
   
   .todo-item {
@@ -267,7 +426,8 @@ body {
 
   .colOne {
     border-radius: 10px 10px 0 0;
-    height: 245px;
+    height: auto;
+    min-height: 400px; /* Increased to accommodate list controls and header */
     flex-shrink: 0;
   }
 
@@ -295,6 +455,50 @@ body {
     
     .add-todo button {
       width: 85px; /* Slightly smaller button on mobile */
+    }
+
+    .app-header {
+      padding: 0px 10px 0px 10px;
+
+      h1 {
+        font-size: 32px;
+      }
+    }
+
+    .add-todo h2, .list-controls h2 {
+      margin-block-start: 1em; /* Reduce spacing on mobile */
+      margin-block-end: 0.5em;
+      font-size: 22px;
+    }
+
+    .list-controls {
+      padding: 0px 10px 10px 10px; /* Adjust padding for mobile */
+    }
+
+    .list-selector {
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .list-selector select {
+      width: 100%;
+    }
+
+    .list-selector button {
+      width: 100%;
+    }
+
+    .add-list-form {
+      flex-wrap: wrap;
+    }
+
+    .add-list-form input {
+      width: 100%;
+      margin-bottom: 5px;
+    }
+
+    .add-list-form button {
+      flex: 1;
     }
   }
 }

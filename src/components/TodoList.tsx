@@ -1,21 +1,38 @@
-import { Todo } from '../pages/TodoApp';
+import { Todo, TodoListType } from '../pages/TodoApp';
 
 type TodoListProps = {
   todos: Todo[];
-  setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
+  currentListId: number;
+  updateTodoLists: (callback: (prevLists: TodoListType[]) => TodoListType[]) => void;
 };
 
-export default function TodoList({ todos, setTodos }: TodoListProps) {
+export default function TodoList({ todos, currentListId, updateTodoLists }: TodoListProps) {
   const handleToggleTodo = (id: number) => {
-    setTodos(prevTodos =>
-      prevTodos.map(todo =>
-        todo.id === id ? { ...todo, completed: !todo.completed } : todo
+    updateTodoLists(prevLists => 
+      prevLists.map(list => 
+        list.id === currentListId 
+          ? {
+              ...list,
+              todos: list.todos.map(todo => 
+                todo.id === id ? { ...todo, completed: !todo.completed } : todo
+              )
+            }
+          : list
       )
     );
   };
 
   const handleDeleteTodo = (id: number) => {
-    setTodos(prevTodos => prevTodos.filter(todo => todo.id !== id));
+    updateTodoLists(prevLists => 
+      prevLists.map(list => 
+        list.id === currentListId
+          ? {
+              ...list,
+              todos: list.todos.filter(todo => todo.id !== id)
+            }
+          : list
+      )
+    );
   };
 
   return (

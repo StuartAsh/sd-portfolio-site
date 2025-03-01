@@ -22,9 +22,6 @@ export default function AddTodo({ addTodoItem }: AddTodoProps) {
 
   return (
     <div className='add-todo'>
-      <h1>More Todo <span className="home-button"><NavLink className={({isActive}) => isActive ? 'activeLink' : ''} to="/"><button>Go Home</button></NavLink></span></h1>
-      <span className='sub-title'>Manage your tasks with ease</span>
-      <br />
       <h2>Add Todo Item:</h2>
       <div className="add-todo">
         <input 
