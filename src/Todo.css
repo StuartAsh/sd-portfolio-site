@@ -81,7 +81,7 @@ body {
   
     h1 {
       font-size: 40px;
-      line-height: 1.4;
+      line-height: 1.3;
       border-bottom: 1px solid #333;
       margin-top: 4px;
       margin-bottom: 5px;
@@ -340,8 +340,9 @@ body {
   }
   
   .todo-list-container {
-    overflow: auto;
+    overflow-y: auto;
     height: calc(100% - 50px);
+    -webkit-overflow-scrolling: touch; /* Improve scrolling on iOS */
   }
   
   .todo-item {
@@ -444,8 +445,10 @@ body {
   .app-container {
     width: calc(100% - 20px);
     height: 90vh;
+    max-height: 90vh; /* Ensure it doesn't exceed viewport height */
     margin: 10px;
-    margin-top: 50px;
+    margin-top: 30px;
+    overflow: hidden; /* Prevent overflow issues */
   }
 
   .panel-border, .panel {
@@ -461,8 +464,10 @@ body {
   .colOne {
     border-radius: 10px 10px 0 0;
     height: auto;
-    min-height: 350px; /* Adjusted for more compact list controls */
+    min-height: 265px; /* Further reduced for more compact mobile view */
+    max-height: 40vh; /* Limit height on small screens */
     flex-shrink: 0;
+    overflow-y: auto; /* Allow scrolling if content overflows */
   }
 
   .colTwo {
@@ -471,6 +476,7 @@ body {
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    -webkit-overflow-scrolling: touch; /* Improve scrolling on iOS */
   }
 
   .app-container {
@@ -495,18 +501,29 @@ body {
       padding: 0px 10px 0px 10px;
 
       h1 {
-        font-size: 32px;
+        font-size: 28px;
+        line-height: 1.2;
+        margin-bottom: 2px;
+      }
+
+      .sub-title {
+        font-size: 15px;
+        display: none; /* Hide subtitle on mobile to save space */
       }
     }
 
+    .add-todo {
+      padding: 0px 10px 5px 10px;
+    }
+
     .add-todo h2, .list-controls h2 {
-      margin-block-start: 1em; /* Reduce spacing on mobile */
-      margin-block-end: 0.5em;
-      font-size: 22px;
+      margin-block-start: 0.6em; /* Further reduce spacing on mobile */
+      margin-block-end: 0.4em;
+      font-size: 18px;
     }
 
     .list-controls {
-      padding: 0px 10px 10px 10px; /* Adjust padding for mobile */
+      padding: 5px 10px 5px 10px; /* Reduced padding for mobile */
     }
 
     .list-selector {
@@ -536,5 +553,43 @@ body {
     .add-list-form button {
       flex: 1;
     }
+  }
+}
+
+/* Landscape mode on mobile devices */
+@media screen and (max-width: 900px) and (orientation: landscape) {
+  .panel-border, .panel {
+    flex-direction: row !important;
+  }
+
+  .colOne {
+    width: 40% !important;
+    min-width: 300px !important;
+    height: 100% !important;
+    max-height: none !important;
+    border-radius: 10px 0 0 10px !important;
+  }
+
+  .colTwo {
+    border-radius: 0 10px 10px 0 !important;
+  }
+
+  .app-container {
+    margin-top: 10px !important;
+    height: 85vh !important;
+  }
+
+  .app-header h1 {
+    font-size: 24px !important;
+  }
+
+  .list-controls h2, .add-todo h2 {
+    font-size: 16px !important;
+    margin-block-start: 0.4em !important;
+  }
+
+  .todo-list-header h2 {
+    font-size: 20px !important;
+    margin: 5px 0 5px 15px !important;
   }
 }
