@@ -350,11 +350,26 @@ body {
   }
   
   .todo-list-container {
-    overflow-y: scroll; /* Use scroll instead of auto for iOS */
     height: calc(100% - 50px);
-    -webkit-overflow-scrolling: touch; /* Improve scrolling on iOS */
-    overscroll-behavior: contain; /* Prevent scroll chaining */
-    touch-action: pan-y; /* Only allow vertical scrolling */
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .todo-list-scroller {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+    touch-action: pan-y;
+    z-index: 5;
+    height: 100%;
+    transform: translate3d(0, 0, 0);
+    will-change: transform;
+    cursor: pointer; /* Makes iOS recognize it as interactive */
   }
   
   .todo-item {
@@ -506,12 +521,26 @@ body {
   .app-container {
     .todo-list-container {
       flex-grow: 1;
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .todo-list-scroller {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
       overflow-y: scroll;
       -webkit-overflow-scrolling: touch;
       overscroll-behavior: contain;
       touch-action: pan-y;
+      z-index: 5;
       height: 100%;
-      position: relative;
+      transform: translate3d(0, 0, 0);
+      will-change: transform;
+      cursor: pointer;
     }
 
     .add-todo .add-todo {
@@ -646,5 +675,15 @@ body {
   
   .add-todo input {
     max-width: calc(100% - 85px) !important;
+  }
+  
+  .todo-list-container {
+    overflow: hidden !important;
+  }
+  
+  .todo-list-scroller {
+    position: absolute !important;
+    overflow-y: scroll !important;
+    -webkit-overflow-scrolling: touch !important;
   }
 }

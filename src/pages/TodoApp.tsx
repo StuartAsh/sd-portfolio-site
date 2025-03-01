@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useLayoutEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import '../Todo.css';
 import Panel from '../components/Panel'
@@ -18,6 +18,38 @@ export type TodoListType = {
 };
 
 function TodoApp() {
+  // Add custom touch handling to fix scrolling on iOS
+  useLayoutEffect(() => {
+    // Fix body scrolling on iOS
+    const originalOverflow = document.body.style.overflow;
+    const originalHeight = document.body.style.height;
+    
+    // Set fixed positioning for the body to prevent scroll
+    document.body.style.overflow = 'hidden';
+    document.body.style.height = '100%';
+    
+    // Add a meta viewport tag to disable scaling
+    let metaViewport = document.querySelector('meta[name="viewport"]');
+    const originalViewport = metaViewport ? metaViewport.getAttribute('content') : '';
+    
+    if (!metaViewport) {
+      metaViewport = document.createElement('meta');
+      metaViewport.setAttribute('name', 'viewport');
+      document.head.appendChild(metaViewport);
+    }
+    
+    metaViewport.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no');
+    
+    // Cleanup function
+    return () => {
+      document.body.style.overflow = originalOverflow;
+      document.body.style.height = originalHeight;
+      
+      if (metaViewport && originalViewport) {
+        metaViewport.setAttribute('content', originalViewport);
+      }
+    };
+  }, []);
   const [todoLists, setTodoLists] = useState<TodoListType[]>(() => {
     // Initialize state from local storage
     const savedTodoLists = localStorage.getItem('todoLists');
