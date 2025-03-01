@@ -161,10 +161,11 @@ function TodoApp() {
                     <option key={list.id} value={list.id}>{list.name}</option>
                   ))}
                 </select>
-                <button onClick={handleDeleteList}>Delete List</button>
+                <button className="add-list-icon" onClick={toggleAddListForm} title="Add New List">+</button>
+                <button className="delete-list-icon" onClick={handleDeleteList} title="Delete Current List">×</button>
               </div>
               
-              {isAddingList ? (
+              {isAddingList && (
                 <div className="add-list-form">
                   <input
                     type="text"
@@ -179,10 +180,6 @@ function TodoApp() {
                   <button onClick={handleAddList}>Add</button>
                   <button onClick={toggleAddListForm}>Cancel</button>
                 </div>
-              ) : (
-                <button className="add-list-button" onClick={toggleAddListForm}>
-                  + New List
-                </button>
               )}
             </div>
             

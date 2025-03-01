@@ -226,34 +226,46 @@ body {
     box-shadow: inset 3px 3px 5px rgba(0, 0, 0, 0.4);
   }
 
-  .list-selector button {
-    background-color: #d23f3f;
-    color: white;
-    border: none;
-    padding: 6px 10px;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-  }
-
-  .list-selector button:hover {
-    background-color: #e04f4f;
-  }
-
-  .add-list-button {
-    width: 100%;
-    padding: 6px 10px;
+  .add-list-icon {
+    width: 36px;
+    height: 36px;
     background-color: #1e8c2f;
     color: white;
     border: none;
     border-radius: 5px;
-    font-size: 16px;
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 1;
     cursor: pointer;
-    margin-top: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
   }
 
-  .add-list-button:hover {
+  .add-list-icon:hover {
     background-color: #26b63a;
+  }
+
+  .delete-list-icon {
+    width: 36px;
+    height: 36px;
+    background-color: #d23f3f;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 28px;
+    font-weight: bold;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+  }
+
+  .delete-list-icon:hover {
+    background-color: #e04f4f;
   }
 
   .add-list-form {
@@ -427,7 +439,7 @@ body {
   .colOne {
     border-radius: 10px 10px 0 0;
     height: auto;
-    min-height: 400px; /* Increased to accommodate list controls and header */
+    min-height: 350px; /* Adjusted for more compact list controls */
     flex-shrink: 0;
   }
 
@@ -476,16 +488,18 @@ body {
     }
 
     .list-selector {
-      flex-direction: column;
-      gap: 5px;
+      flex-direction: row;
+      gap: 6px;
+      margin-bottom: 10px;
     }
 
     .list-selector select {
-      width: 100%;
+      flex: 1;
     }
 
-    .list-selector button {
-      width: 100%;
+    .add-list-icon, .delete-list-icon {
+      width: 34px;
+      height: 34px;
     }
 
     .add-list-form {
