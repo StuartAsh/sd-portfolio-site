@@ -277,14 +277,34 @@ function TodoApp() {
           <div className='colTwo'>
             {currentList ? (
               <div className="todo-list-header">
-                <h2>
-                  {currentList.name}
-                  <button 
-                    className="edit-list-name" 
-                    onClick={toggleEditListForm}
-                    title="Edit List Name"
+                <h2 className="list-title-container">
+                  <span className="list-title">
+                    {currentList.name}
+                    <button 
+                      className="edit-list-name" 
+                      onClick={toggleEditListForm}
+                      title="Edit List Name"
+                    >
+                      ✎
+                    </button>
+                  </span>
+                  <button
+                    className="clear-completed-button"
+                    onClick={() => {
+                      const filteredTodos = currentList.todos.filter(todo => !todo.completed);
+                      if (currentList.todos.length > filteredTodos.length) {
+                        updateTodoLists(prevLists => 
+                          prevLists.map(list => 
+                            list.id === currentListId
+                              ? { ...list, todos: filteredTodos }
+                              : list
+                          )
+                        );
+                      }
+                    }}
+                    title="Remove all completed items"
                   >
-                    ✎
+                    Clear completed
                   </button>
                 </h2>
                 <TodoList 
