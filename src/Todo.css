@@ -827,24 +827,34 @@ body {
     min-width: 300px !important;
     height: 100% !important;
     max-height: none !important;
-    border-radius: 10px 0 0 10px !important;
+    border-radius: 0 !important; /* Remove border radius in landscape */
     padding-right: 10px !important;
     overflow-y: auto !important;
   }
 
   .colTwo {
-    border-radius: 0 10px 10px 0 !important;
+    border-radius: 0 !important; /* Remove border radius in landscape */
     width: 60% !important;
     flex: 1 !important;
   }
 
   .app-container {
-    margin-top: 40px !important; /* Increased for header space */
-    margin-bottom: 20px !important;
-    height: 75vh !important; /* Reduced height */
-    max-height: 75vh !important;
+    margin: 0 !important; /* Remove all margins */
+    padding: 0 !important;
+    height: 100vh !important; /* Full viewport height */
+    max-height: 100vh !important;
+    width: 100% !important; /* Full width */
+    max-width: 100% !important;
+    border-radius: 0 !important;
     box-sizing: border-box !important;
     overflow: hidden !important;
+  }
+  
+  .panel, .panel-border {
+    border-radius: 0 !important; /* Remove border radius on full screen */
+    height: 100vh !important;
+    box-shadow: none !important; /* Remove shadow for full screen */
+    border: none !important; /* Remove border for full screen */
   }
 
   .app-header h1 {

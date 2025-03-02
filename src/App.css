@@ -241,8 +241,21 @@ body {
   }
   
   .main-layout {
-    margin-top: 10px; /* Reduce top margin since header is hidden */
+    margin-top: 0; /* Remove top margin since header is hidden */
     height: 100vh; /* Use full viewport height */
+  }
+  
+  body, html {
+    overflow: hidden; /* Prevent scrolling */
+    height: 100%; /* Ensure full height */
+    margin: 0;
+    padding: 0;
+  }
+  
+  #root {
+    height: 100vh; /* Full viewport height */
+    padding: 0;
+    margin: 0;
   }
 }
 
