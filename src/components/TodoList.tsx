@@ -1,5 +1,5 @@
 import { Todo, TodoListType } from '../pages/TodoApp';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 type TodoListProps = {
   todos: Todo[];
@@ -9,6 +9,9 @@ type TodoListProps = {
 
 export default function TodoList({ todos, currentListId, updateTodoLists }: TodoListProps) {
   const scrollerRef = useRef<HTMLDivElement>(null);
+  const [editingTodoId, setEditingTodoId] = useState<number | null>(null);
+  const [editingText, setEditingText] = useState<string>('');
+  const editInputRef = useRef<HTMLInputElement>(null);
 
   // Initialize scroll handling with improved iOS support
   useEffect(() => {
@@ -100,6 +103,68 @@ export default function TodoList({ todos, currentListId, updateTodoLists }: Todo
       )
     );
   };
+  
+  // Start editing a todo
+  const handleStartEdit = (id: number, text: string) => {
+    // Don't allow editing if we're already editing another todo
+    if (editingTodoId !== null) return;
+    
+    setEditingTodoId(id);
+    setEditingText(text);
+    
+    // Focus the input after a small delay to allow the component to render
+    setTimeout(() => {
+      if (editInputRef.current) {
+        editInputRef.current.focus();
+      }
+    }, 10);
+  };
+  
+  // Save the edited todo
+  const handleSaveEdit = () => {
+    if (editingTodoId === null) return;
+    
+    // Don't save if the text is empty
+    if (!editingText.trim()) {
+      setEditingTodoId(null);
+      return;
+    }
+    
+    // Save changes if the text is different
+    updateTodoLists(prevLists => 
+      prevLists.map(list => 
+        list.id === currentListId
+          ? {
+              ...list,
+              todos: list.todos.map(todo => 
+                todo.id === editingTodoId
+                  ? { ...todo, text: editingText.trim() }
+                  : todo
+              )
+            }
+          : list
+      )
+    );
+    
+    // Reset editing state
+    setEditingTodoId(null);
+    setEditingText('');
+  };
+  
+  // Cancel editing
+  const handleCancelEdit = () => {
+    setEditingTodoId(null);
+    setEditingText('');
+  };
+  
+  // Handle key presses in the edit input
+  const handleEditKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      handleSaveEdit();
+    } else if (e.key === 'Escape') {
+      handleCancelEdit();
+    }
+  };
 
   return (
     <div className='todo-list-container' id="scrollable-todo-list"> 
@@ -109,7 +174,27 @@ export default function TodoList({ todos, currentListId, updateTodoLists }: Todo
           {todos.sort((a,b) => (Number(a.completed) - Number(b.completed))).map((todo) => (
             <li key={todo.id} className='todo-item'>
               <input type="checkbox" checked={todo.completed} onChange={() => handleToggleTodo(todo.id)} />
-              <span>{todo.text}</span>
+              
+              {editingTodoId === todo.id ? (
+                <div className="todo-edit-container">
+                  <input
+                    type="text"
+                    value={editingText}
+                    onChange={(e) => setEditingText(e.target.value)}
+                    onKeyDown={handleEditKeyDown}
+                    onBlur={handleSaveEdit}
+                    ref={editInputRef}
+                    className="todo-edit-input"
+                  />
+                  <div className="todo-edit-buttons">
+                    <button onClick={handleSaveEdit} className="todo-edit-save">✓</button>
+                    <button onClick={handleCancelEdit} className="todo-edit-cancel">✕</button>
+                  </div>
+                </div>
+              ) : (
+                <span onClick={() => handleStartEdit(todo.id, todo.text)}>{todo.text}</span>
+              )}
+              
               <button className="delete-todo-icon" onClick={() => handleDeleteTodo(todo.id)} title="Delete Todo">×</button>
             </li>
           ))}
