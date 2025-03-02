@@ -398,14 +398,32 @@ body {
     flex: 1;
   }
   
+  .todo-list-inner {
+    min-height: 101%; /* Ensure scrollability even with few items */
+    padding-bottom: 40px;
+  }
+  
+  .scroll-spacer {
+    height: 30px; /* Extra space at bottom to ensure scrollability */
+    width: 100%;
+  }
+  
+  .todo-empty {
+    text-align: center;
+    color: #777;
+    justify-content: center;
+    font-style: italic;
+    padding: 20px !important;
+  }
+  
   .todo-list-scroller {
     position: absolute;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
-    overflow-y: scroll;
-    -webkit-overflow-scrolling: touch;
+    overflow-y: auto; /* Using auto instead of scroll can help on iOS */
+    -webkit-overflow-scrolling: touch !important; /* Critical for momentum scrolling */
     overscroll-behavior: contain;
     touch-action: pan-y;
     z-index: 5;
@@ -413,6 +431,8 @@ body {
     transform: translate3d(0, 0, 0);
     will-change: transform;
     cursor: pointer; /* Makes iOS recognize it as interactive */
+    padding-bottom: 30px; /* Extra padding to ensure scrollability */
+    -webkit-tap-highlight-color: rgba(0,0,0,0); /* Remove tap highlight on iOS */
   }
   
   .todo-item {
@@ -576,8 +596,8 @@ body {
       bottom: 0;
       left: 0;
       right: 0;
-      overflow-y: scroll;
-      -webkit-overflow-scrolling: touch;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch !important;
       overscroll-behavior: contain;
       touch-action: pan-y;
       z-index: 5;
@@ -585,6 +605,11 @@ body {
       transform: translate3d(0, 0, 0);
       will-change: transform;
       cursor: pointer;
+      padding-bottom: 30px;
+      -webkit-tap-highlight-color: rgba(0,0,0,0);
+      /* iOS-specific fixes */
+      -webkit-user-select: none; /* Prevent text selection during scroll */
+      user-select: none;
     }
 
     .add-todo .add-todo {
@@ -772,7 +797,11 @@ body {
   
   .todo-list-scroller {
     position: absolute !important;
-    overflow-y: scroll !important;
+    overflow-y: auto !important;
     -webkit-overflow-scrolling: touch !important;
+    padding-bottom: 30px !important;
+    -webkit-tap-highlight-color: rgba(0,0,0,0) !important;
+    -webkit-user-select: none !important;
+    user-select: none !important;
   }
 }

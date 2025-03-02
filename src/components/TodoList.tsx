@@ -10,57 +10,71 @@ type TodoListProps = {
 export default function TodoList({ todos, currentListId, updateTodoLists }: TodoListProps) {
   const scrollerRef = useRef<HTMLDivElement>(null);
 
-  // Initialize scroll handling
+  // Initialize scroll handling with improved iOS support
   useEffect(() => {
     const scroller = scrollerRef.current;
     if (!scroller) return;
     
-    // Prevent default touchmove behavior on the container to avoid page scrolling
-    const handleTouchMove = (e: TouchEvent) => {
-      if (scroller.scrollHeight > scroller.clientHeight) {
-        e.stopPropagation();
-      }
+    // Mark the scrollable area explicitly for iOS
+    scroller.style.WebkitOverflowScrolling = 'touch';
+    
+    // Simple approach - prevent body/document scrolling when touching the list
+    const preventBodyScroll = (e: TouchEvent) => {
+      // Don't do anything special - just let the default behavior work
+      // This is counterintuitive but often works better on iOS
     };
     
-    const handleTouchStart = (e: TouchEvent) => {
-      const touchStartY = e.touches[0].clientY;
+    // Ensure the container is scrollable by refreshing scroll properties
+    const makeScrollable = () => {
+      // Force repaint to help iOS recognize the element as scrollable
+      scroller.style.display = 'none';
+      void scroller.offsetHeight; // Force reflow
+      scroller.style.display = 'block';
       
-      const handleTouchMoveWithDirection = (e: TouchEvent) => {
-        const touchY = e.touches[0].clientY;
-        const scrollTop = scroller.scrollTop;
-        const scrollHeight = scroller.scrollHeight;
-        const clientHeight = scroller.clientHeight;
-        
-        // Prevent default only when scrolling within bounds
-        if (
-          (scrollTop === 0 && touchY > touchStartY) || // At top and scrolling down
-          (scrollTop >= scrollHeight - clientHeight && touchY < touchStartY) // At bottom and scrolling up
-        ) {
-          return; // Let the page scroll
-        }
-        
-        // Otherwise prevent default to allow div to scroll
-        e.preventDefault();
-      };
-      
-      scroller.addEventListener('touchmove', handleTouchMoveWithDirection, { passive: false });
-      
-      const cleanup = () => {
-        scroller.removeEventListener('touchmove', handleTouchMoveWithDirection);
-        scroller.removeEventListener('touchend', cleanup);
-        scroller.removeEventListener('touchcancel', cleanup);
-      };
-      
-      scroller.addEventListener('touchend', cleanup, { once: true });
-      scroller.addEventListener('touchcancel', cleanup, { once: true });
+      // Add a small delay before resetting to flex
+      setTimeout(() => {
+        scroller.style.display = 'flex';
+      }, 20);
     };
     
-    scroller.addEventListener('touchstart', handleTouchStart);
-    scroller.addEventListener('touchmove', handleTouchMove, { passive: false });
+    // Run this once on mount
+    makeScrollable();
+    
+    // Add pointer events to ensure iOS gives this touch priority
+    const addPointerEvents = () => {
+      scroller.style.touchAction = 'pan-y';
+      scroller.style.cursor = 'pointer';
+    };
+    
+    // Ensure the container is in the right state after orientation changes
+    const handleOrientationChange = () => {
+      setTimeout(makeScrollable, 300);
+    };
+    
+    // Simple touch start handler
+    const handleTouchStart = () => {
+      // Disable body scrolling when touching the list
+      document.body.style.overflow = 'hidden';
+      addPointerEvents();
+    };
+    
+    // Re-enable body scrolling when touch ends
+    const handleTouchEnd = () => {
+      setTimeout(() => {
+        document.body.style.overflow = '';
+      }, 50);
+    };
+    
+    // Minimize event handlers - sometimes less is more on iOS
+    scroller.addEventListener('touchstart', handleTouchStart, { passive: true });
+    scroller.addEventListener('touchend', handleTouchEnd, { passive: true });
+    window.addEventListener('orientationchange', handleOrientationChange);
     
     return () => {
       scroller.removeEventListener('touchstart', handleTouchStart);
-      scroller.removeEventListener('touchmove', handleTouchMove);
+      scroller.removeEventListener('touchend', handleTouchEnd);
+      window.removeEventListener('orientationchange', handleOrientationChange);
+      document.body.style.overflow = '';
     };
   }, []);
   const handleToggleTodo = (id: number) => {
@@ -94,15 +108,21 @@ export default function TodoList({ todos, currentListId, updateTodoLists }: Todo
   return (
     <div className='todo-list-container' id="scrollable-todo-list"> 
       <div className="todo-list-scroller" ref={scrollerRef}>
-        <ul className='todo-list'>
-        {todos.sort((a,b) => (Number(a.completed) - Number(b.completed))).map((todo) => (
-          <li key={todo.id} className='todo-item'>
-            <input type="checkbox" checked={todo.completed} onChange={() => handleToggleTodo(todo.id)} />
-            <span>{todo.text}</span>
-            <button className="delete-todo-icon" onClick={() => handleDeleteTodo(todo.id)} title="Delete Todo">×</button>
-          </li>
-        ))}
-        </ul>
+        <div className="todo-list-inner">
+          <ul className='todo-list'>
+          {todos.sort((a,b) => (Number(a.completed) - Number(b.completed))).map((todo) => (
+            <li key={todo.id} className='todo-item'>
+              <input type="checkbox" checked={todo.completed} onChange={() => handleToggleTodo(todo.id)} />
+              <span>{todo.text}</span>
+              <button className="delete-todo-icon" onClick={() => handleDeleteTodo(todo.id)} title="Delete Todo">×</button>
+            </li>
+          ))}
+          {todos.length === 0 && (
+            <li className="todo-item todo-empty">No items in this list</li>
+          )}
+          </ul>
+          <div className="scroll-spacer"></div>
+        </div>
       </div>
     </div>
   )
