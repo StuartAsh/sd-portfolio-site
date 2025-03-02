@@ -443,6 +443,8 @@ body {
     padding: 8px;
     border-bottom: 1px solid #ccc;
     box-sizing: border-box;
+    transition: background-color 0.2s ease;
+    cursor: grab;
   }
   
   .todo-item:first-child {
@@ -459,6 +461,13 @@ body {
   
   .todo-item:nth-child(even) {
     background-color: rgba(0, 150, 0, 0.1);
+  }
+  
+  .todo-item.dragging {
+    background-color: rgba(0, 150, 0, 0.2);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+    z-index: 999;
   }
   
   .todo-item input[type="checkbox"] {

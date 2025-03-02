@@ -1,5 +1,6 @@
 import { Todo, TodoListType } from '../pages/TodoApp';
 import { useEffect, useRef, useState } from 'react';
+import { DragDropContext, Droppable, Draggable, DropResult } from 'react-beautiful-dnd';
 
 type TodoListProps = {
   todos: Todo[];
@@ -12,6 +13,16 @@ export default function TodoList({ todos, currentListId, updateTodoLists }: Todo
   const [editingTodoId, setEditingTodoId] = useState<number | null>(null);
   const [editingText, setEditingText] = useState<string>('');
   const editInputRef = useRef<HTMLInputElement>(null);
+  
+  // Local state to manage the sorted todo items
+  const [sortedTodos, setSortedTodos] = useState<Todo[]>([]);
+
+  // Update sortedTodos when the todos prop changes
+  useEffect(() => {
+    // Sort todos by completion status
+    const sorted = [...todos].sort((a, b) => (Number(a.completed) - Number(b.completed)));
+    setSortedTodos(sorted);
+  }, [todos]);
 
   // Initialize scroll handling with improved iOS support
   useEffect(() => {
@@ -76,6 +87,7 @@ export default function TodoList({ todos, currentListId, updateTodoLists }: Todo
       document.body.style.overflow = '';
     };
   }, []);
+
   const handleToggleTodo = (id: number) => {
     updateTodoLists(prevLists => 
       prevLists.map(list => 
@@ -166,45 +178,110 @@ export default function TodoList({ todos, currentListId, updateTodoLists }: Todo
     }
   };
 
+  // Handle drag end event
+  const handleDragEnd = (result: DropResult) => {
+    const { destination, source } = result;
+
+    // If there's no destination or if the item is dropped in the same position, do nothing
+    if (!destination || 
+        (destination.droppableId === source.droppableId && 
+         destination.index === source.index)) {
+      return;
+    }
+
+    // Create a new array of todos with the dragged item in the new position
+    const newTodos = Array.from(sortedTodos);
+    const [movedItem] = newTodos.splice(source.index, 1);
+    newTodos.splice(destination.index, 0, movedItem);
+    
+    // Update local state
+    setSortedTodos(newTodos);
+    
+    // Persist the new order to the parent component
+    updateTodoLists(prevLists => 
+      prevLists.map(list => 
+        list.id === currentListId
+          ? {
+              ...list,
+              todos: newTodos
+            }
+          : list
+      )
+    );
+  };
+
   return (
     <div className='todo-list-container' id="scrollable-todo-list"> 
       <div className="todo-list-scroller" ref={scrollerRef}>
         <div className="todo-list-inner">
-          <ul className='todo-list'>
-          {todos.sort((a,b) => (Number(a.completed) - Number(b.completed))).map((todo) => (
-            <li key={todo.id} className='todo-item'>
-              <input type="checkbox" checked={todo.completed} onChange={() => handleToggleTodo(todo.id)} />
-              
-              {editingTodoId === todo.id ? (
-                <div className="todo-edit-container">
-                  <input
-                    type="text"
-                    value={editingText}
-                    onChange={(e) => setEditingText(e.target.value)}
-                    onKeyDown={handleEditKeyDown}
-                    onBlur={handleSaveEdit}
-                    ref={editInputRef}
-                    className="todo-edit-input"
-                  />
-                  <div className="todo-edit-buttons">
-                    <button onClick={handleSaveEdit} className="todo-edit-save">✓</button>
-                    <button onClick={handleCancelEdit} className="todo-edit-cancel">✕</button>
-                  </div>
-                </div>
-              ) : (
-                <span onClick={() => handleStartEdit(todo.id, todo.text)}>{todo.text}</span>
+          <DragDropContext onDragEnd={handleDragEnd}>
+            <Droppable droppableId="todoList">
+              {(provided) => (
+                <ul 
+                  className='todo-list'
+                  {...provided.droppableProps}
+                  ref={provided.innerRef}
+                >
+                  {sortedTodos.map((todo, index) => (
+                    <Draggable 
+                      key={todo.id.toString()} 
+                      draggableId={todo.id.toString()} 
+                      index={index}
+                      isDragDisabled={editingTodoId === todo.id}
+                    >
+                      {(provided, snapshot) => (
+                        <li 
+                          ref={provided.innerRef}
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
+                          className={`todo-item ${snapshot.isDragging ? 'dragging' : ''}`}
+                          style={{
+                            ...provided.draggableProps.style,
+                            opacity: snapshot.isDragging ? 0.8 : 1
+                          }}
+                        >
+                          <input 
+                            type="checkbox" 
+                            checked={todo.completed} 
+                            onChange={() => handleToggleTodo(todo.id)} 
+                          />
+                          
+                          {editingTodoId === todo.id ? (
+                            <div className="todo-edit-container">
+                              <input
+                                type="text"
+                                value={editingText}
+                                onChange={(e) => setEditingText(e.target.value)}
+                                onKeyDown={handleEditKeyDown}
+                                onBlur={handleSaveEdit}
+                                ref={editInputRef}
+                                className="todo-edit-input"
+                              />
+                              <div className="todo-edit-buttons">
+                                <button onClick={handleSaveEdit} className="todo-edit-save">✓</button>
+                                <button onClick={handleCancelEdit} className="todo-edit-cancel">✕</button>
+                              </div>
+                            </div>
+                          ) : (
+                            <span onClick={() => handleStartEdit(todo.id, todo.text)}>{todo.text}</span>
+                          )}
+                          
+                          <button className="delete-todo-icon" onClick={() => handleDeleteTodo(todo.id)} title="Delete Todo">×</button>
+                        </li>
+                      )}
+                    </Draggable>
+                  ))}
+                  {provided.placeholder}
+                  {sortedTodos.length === 0 && (
+                    <li className="todo-item todo-empty">No items in this list</li>
+                  )}
+                </ul>
               )}
-              
-              <button className="delete-todo-icon" onClick={() => handleDeleteTodo(todo.id)} title="Delete Todo">×</button>
-            </li>
-          ))}
-          {todos.length === 0 && (
-            <li className="todo-item todo-empty">No items in this list</li>
-          )}
-          </ul>
+            </Droppable>
+          </DragDropContext>
           <div className="scroll-spacer"></div>
         </div>
       </div>
     </div>
-  )
+  );
 }
