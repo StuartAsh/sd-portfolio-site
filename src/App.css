@@ -234,6 +234,18 @@ body {
   }
 }
 
+/* Hide header in landscape mode on mobile devices */
+@media (max-width: 900px) and (orientation: landscape) {
+  .menu-bar {
+    display: none;
+  }
+  
+  .main-layout {
+    margin-top: 10px; /* Reduce top margin since header is hidden */
+    height: 100vh; /* Use full viewport height */
+  }
+}
+
 @media (min-width: 769px) {
   .side-bar ul {
     display: grid;
