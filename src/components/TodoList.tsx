@@ -16,13 +16,9 @@ export default function TodoList({ todos, currentListId, updateTodoLists }: Todo
     if (!scroller) return;
     
     // Mark the scrollable area explicitly for iOS
-    scroller.style.WebkitOverflowScrolling = 'touch';
+    // Use type assertion to work around TypeScript limitation with vendor prefixes
+    (scroller.style as any)['-webkit-overflow-scrolling'] = 'touch';
     
-    // Simple approach - prevent body/document scrolling when touching the list
-    const preventBodyScroll = (e: TouchEvent) => {
-      // Don't do anything special - just let the default behavior work
-      // This is counterintuitive but often works better on iOS
-    };
     
     // Ensure the container is scrollable by refreshing scroll properties
     const makeScrollable = () => {
