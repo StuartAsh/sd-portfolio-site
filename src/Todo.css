@@ -361,11 +361,13 @@ body {
   }
 
   .todo-list-header h2 {
-    margin: 10px 0 5px 15px;
+    margin: 10px 15px 5px 15px; /* Added right margin of 15px */
     color: #333;
     font-size: 26px;
     border-bottom: 1px solid #ccc;
     padding-bottom: 5px;
+    box-sizing: border-box;
+    width: calc(100% - 30px); /* Account for left and right margin */
   }
   
   .list-title-container {
@@ -373,7 +375,6 @@ body {
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    margin-right: 15px;
     box-sizing: border-box;
   }
   
@@ -391,7 +392,6 @@ body {
     font-size: 14px;
     cursor: pointer;
     height: 28px;
-    margin-right: 15px;
     white-space: nowrap;
   }
   
@@ -404,6 +404,7 @@ body {
     display: flex;
     flex-direction: column;
     height: 100%;
+    padding-right: 15px; /* Additional padding to ensure contents don't touch the edge */
   }
 
   .todo-list-empty {
