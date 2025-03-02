@@ -247,8 +247,8 @@ function TodoApp() {
                     }}
                     autoFocus
                   />
-                  <button onClick={handleAddList}>Add</button>
-                  <button onClick={toggleAddListForm}>Cancel</button>
+                  <button onClick={handleAddList}>OK</button>
+                  <button onClick={toggleAddListForm}>X</button>
                 </div>
               )}
               
@@ -265,8 +265,8 @@ function TodoApp() {
                     }}
                     autoFocus
                   />
-                  <button onClick={handleEditListName}>Save</button>
-                  <button onClick={toggleEditListForm}>Cancel</button>
+                  <button onClick={handleEditListName}>OK</button>
+                  <button onClick={toggleEditListForm}>X</button>
                 </div>
               )}
             </div>

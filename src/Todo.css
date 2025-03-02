@@ -278,9 +278,10 @@ body {
 
   .add-list-form {
     display: flex;
-    gap: 5px;
+    gap: 4px;
     margin-top: 5px;
     width: 100%;
+    align-items: center;
   }
 
   .add-list-form input {
@@ -291,6 +292,7 @@ body {
     border-radius: 5px;
     border: 1px solid #ccc;
     background-color: #c0e1b3;
+    width: calc(100% - 100px); /* Reserve space for buttons */
   }
 
   .add-list-form input:focus {
@@ -317,12 +319,15 @@ body {
     background-color: #1e8c2f;
     color: white;
     border: none;
-    padding: 6px 5px;
+    padding: 6px 4px;
     border-radius: 5px;
     font-size: 14px;
     cursor: pointer;
-    width: 50px;
+    width: 40px;
     flex-shrink: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .add-list-form button:first-of-type:hover {
@@ -333,12 +338,15 @@ body {
     background-color: #d23f3f;
     color: white;
     border: none;
-    padding: 6px 5px;
+    padding: 6px 4px;
     border-radius: 5px;
     font-size: 14px;
     cursor: pointer;
-    width: 60px;
+    width: 50px;
     flex-shrink: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .add-list-form button:last-of-type:hover {
@@ -654,14 +662,21 @@ body {
       width: calc(100% - 6px); /* Adjust width to account for margin */
     }
 
+    .add-list-form {
+      flex-wrap: nowrap;
+    }
+    
     .add-list-form input {
-      width: 100%;
-      margin-bottom: 5px;
+      width: calc(100% - 96px);
       box-sizing: border-box;
     }
 
     .add-list-form button {
-      flex: 1;
+      width: 40px !important;
+    }
+    
+    .add-list-form button:last-of-type {
+      width: 40px !important;
     }
   }
 }
