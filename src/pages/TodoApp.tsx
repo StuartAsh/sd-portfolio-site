@@ -293,8 +293,8 @@ function TodoApp() {
                     onClick={() => {
                       const filteredTodos = currentList.todos.filter(todo => !todo.completed);
                       if (currentList.todos.length > filteredTodos.length) {
-                        updateTodoLists(prevLists => 
-                          prevLists.map(list => 
+                        setTodoLists((prevLists: TodoListType[]) => 
+                          prevLists.map((list: TodoListType) => 
                             list.id === currentListId
                               ? { ...list, todos: filteredTodos }
                               : list
