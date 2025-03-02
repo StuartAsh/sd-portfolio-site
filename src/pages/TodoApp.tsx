@@ -96,6 +96,8 @@ function TodoApp() {
 
   const [newListName, setNewListName] = useState<string>('');
   const [isAddingList, setIsAddingList] = useState<boolean>(false);
+  const [isEditingList, setIsEditingList] = useState<boolean>(false);
+  const [editedListName, setEditedListName] = useState<string>('');
 
   useEffect(() => {
     // Update local storage whenever todoLists state changes
@@ -172,6 +174,41 @@ function TodoApp() {
       setCurrentListId(updatedLists[0].id);
     }
   };
+  
+  const toggleEditListForm = () => {
+    if (!isEditingList) {
+      const currentList = todoLists.find(list => list.id === currentListId);
+      if (currentList) {
+        setEditedListName(currentList.name);
+      }
+    }
+    setIsEditingList(!isEditingList);
+  };
+  
+  const handleEditListName = () => {
+    if (!editedListName.trim()) {
+      alert('Please enter a list name');
+      return;
+    }
+    
+    // Check if list name already exists (excluding current list)
+    if (todoLists.some(list => 
+      list.id !== currentListId && 
+      list.name.toLowerCase() === editedListName.trim().toLowerCase()
+    )) {
+      alert('A list with this name already exists');
+      return;
+    }
+    
+    const updatedLists = todoLists.map(list => 
+      list.id === currentListId
+        ? { ...list, name: editedListName.trim() }
+        : list
+    );
+    
+    setTodoLists(updatedLists);
+    setIsEditingList(false);
+  };
 
   const currentList = todoLists.find(list => list.id === currentListId);
 
@@ -208,9 +245,28 @@ function TodoApp() {
                       if (e.key === 'Enter') handleAddList();
                       if (e.key === 'Escape') toggleAddListForm();
                     }}
+                    autoFocus
                   />
                   <button onClick={handleAddList}>Add</button>
                   <button onClick={toggleAddListForm}>Cancel</button>
+                </div>
+              )}
+              
+              {isEditingList && (
+                <div className="add-list-form">
+                  <input
+                    type="text"
+                    value={editedListName}
+                    onChange={(e) => setEditedListName(e.target.value)}
+                    placeholder="Edit list name"
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter') handleEditListName();
+                      if (e.key === 'Escape') toggleEditListForm();
+                    }}
+                    autoFocus
+                  />
+                  <button onClick={handleEditListName}>Save</button>
+                  <button onClick={toggleEditListForm}>Cancel</button>
                 </div>
               )}
             </div>
@@ -221,7 +277,16 @@ function TodoApp() {
           <div className='colTwo'>
             {currentList ? (
               <div className="todo-list-header">
-                <h2>{currentList.name}</h2>
+                <h2>
+                  {currentList.name}
+                  <button 
+                    className="edit-list-name" 
+                    onClick={toggleEditListForm}
+                    title="Edit List Name"
+                  >
+                    ✎
+                  </button>
+                </h2>
                 <TodoList 
                   todos={currentList.todos || []} 
                   currentListId={currentListId}

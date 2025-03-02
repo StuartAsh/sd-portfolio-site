@@ -280,10 +280,12 @@ body {
     display: flex;
     gap: 5px;
     margin-top: 5px;
+    width: 100%;
   }
 
   .add-list-form input {
     flex: 1;
+    min-width: 0; /* Allow input to shrink below its content size */
     font-size: 16px;
     padding: 6px 10px;
     border-radius: 5px;
@@ -295,15 +297,32 @@ body {
     outline: none;
     box-shadow: inset 3px 3px 5px rgba(0, 0, 0, 0.4);
   }
+  
+  /* Edit list name button */
+  .edit-list-name {
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-left: 5px;
+    color: #1e8c2f;
+    font-weight: bold;
+    font-size: 16px;
+  }
+  
+  .edit-list-name:hover {
+    color: #26b63a;
+  }
 
   .add-list-form button:first-of-type {
     background-color: #1e8c2f;
     color: white;
     border: none;
-    padding: 6px 10px;
+    padding: 6px 5px;
     border-radius: 5px;
-    font-size: 16px;
+    font-size: 14px;
     cursor: pointer;
+    width: 50px;
+    flex-shrink: 0;
   }
 
   .add-list-form button:first-of-type:hover {
@@ -314,10 +333,12 @@ body {
     background-color: #d23f3f;
     color: white;
     border: none;
-    padding: 6px 10px;
+    padding: 6px 5px;
     border-radius: 5px;
-    font-size: 16px;
+    font-size: 14px;
     cursor: pointer;
+    width: 60px;
+    flex-shrink: 0;
   }
 
   .add-list-form button:last-of-type:hover {
