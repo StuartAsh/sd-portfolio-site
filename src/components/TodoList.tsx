@@ -237,7 +237,8 @@ export default function TodoList({ todos, currentListId, updateTodoLists }: Todo
                           className={`todo-item ${snapshot.isDragging ? 'dragging' : ''}`}
                           style={{
                             ...provided.draggableProps.style,
-                            opacity: snapshot.isDragging ? 0.8 : 1
+                            opacity: snapshot.isDragging ? 0.8 : 1,
+                            width: '100%'
                           }}
                         >
                           <input 
