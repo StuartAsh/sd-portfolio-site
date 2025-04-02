@@ -3,7 +3,7 @@ import React, { createContext, useEffect, useState } from 'react'
 import ReactDOM from 'react-dom/client';
 import HomePage from './pages/HomePage.tsx'
 import ErrorPage from './pages/ErrorPage.tsx'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import MenuBar from './components/MenuBar.tsx';
 import ResumePage from './pages/ResumePage.tsx';
 import AboutPage from './pages/AboutPage.tsx';
@@ -30,31 +30,19 @@ const MobileProvider = ({children}: {children: React.ReactNode}) => {
   )
 }
 
-const router = createBrowserRouter([
-  { 
-    path: '/', 
-    element: <HomePage />,
-    errorElement: <ErrorPage />
-  },
-  { 
-    path: '/resume', 
-    element: <ResumePage />
-  },
-  { 
-    path: '/about', 
-    element: <AboutPage />
-  },
-  { 
-    path: '/todo', 
-    element: <TodoApp />
-  },
-]);
-
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <MobileProvider>
-      <MenuBar />
-      <RouterProvider router={router} />
+      <BrowserRouter>
+        <MenuBar />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/resume" element={<ResumePage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/todo" element={<TodoApp />} />
+          <Route path="*" element={<ErrorPage />} />
+        </Routes>
+      </BrowserRouter>
     </MobileProvider>
   </React.StrictMode>,
 )

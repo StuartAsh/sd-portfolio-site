@@ -217,11 +217,6 @@ function TodoApp() {
       <div className="app-container">
         <Panel>
           <div className='colOne'>
-            <div className="app-header">
-              <h1>More Todo <span className="home-button"><NavLink className="NavLink" to="/"><button>Go Home</button></NavLink></span></h1>
-              <span className='sub-title'>Manage your tasks with ease</span>
-            </div>
-            
             <div className="list-controls">
               <h2>Todo Lists:</h2>
               <div className="list-selector">

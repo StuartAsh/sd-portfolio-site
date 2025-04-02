@@ -21,7 +21,7 @@ body {
   width: calc(100% - 40px);
   max-width: 1280px;
   height: 90vh;
-  margin: 50px auto 20px auto;
+  margin: 40px auto 20px auto;
   display: flex;  /* Make app-container a flex container */
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
@@ -61,6 +61,9 @@ body {
   background-color: rgba(256, 256, 256, 0.7);
   box-sizing: border-box;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  padding-top: 20px; /* Add padding at the top to compensate for removed header */
 }
 
 .colTwo {
@@ -77,8 +80,8 @@ body {
 .app-container {
   width: calc(100% - 40px);
   max-width: 1280px;
-  height: 85vh; /* Reduced height to leave space at bottom */
-  margin: 60px auto 20px auto; /* Increased top margin for spacing from header */
+  height: calc(100vh - 50px); /* Stretch to 10px from bottom of screen, 40px from top */
+  margin: 40px auto 10px auto; /* Adjust bottom margin to 10px */
   display: flex;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   box-sizing: border-box;
@@ -652,11 +655,11 @@ body {
   
   .app-container {
     width: calc(100% - 20px);
-    height: 80vh;
-    max-height: 80vh; /* Reduced height to ensure space at bottom */
+    height: calc(100vh - 60px); /* Allow space at top and bottom */
+    max-height: calc(100vh - 60px);
     margin: 10px;
-    margin-top: 40px; /* Increased to avoid overlap with header */
-    margin-bottom: 20px; /* Added bottom margin */
+    margin-top: 40px; /* Space for header */
+    margin-bottom: 10px; /* Reduced bottom margin */
     position: relative;
     overflow: hidden; /* Prevent overflow issues */
     box-sizing: border-box;
@@ -676,14 +679,15 @@ body {
   .colOne {
     border-radius: 10px 10px 0 0;
     height: auto;
-    min-height: 255px; /* Further reduced for more compact mobile view */
-    max-height: 40vh; /* Limit height on small screens */
+    min-height: 230px; /* Reduced for more compact view now that header is gone */
+    max-height: 35vh; /* Reduce max height to give more space to list */
     flex-shrink: 0;
     overflow-y: auto; /* Allow scrolling if content overflows */
     width: 100% !important;
     min-width: 0 !important;
     box-sizing: border-box;
     padding-right: 10px; /* Add right padding to avoid content being cut off */
+    padding-top: 10px; /* Less padding on mobile */
   }
 
   .colTwo {
@@ -862,6 +866,7 @@ body {
     max-height: none !important;
     border-radius: 0 !important; /* Remove border radius in landscape */
     padding-right: 10px !important;
+    padding-top: 15px !important; /* Add padding to top in landscape mode */
     overflow-y: auto !important;
   }
 
