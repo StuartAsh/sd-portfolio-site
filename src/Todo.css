@@ -80,8 +80,8 @@ body {
 .app-container {
   width: calc(100% - 40px);
   max-width: 1280px;
-  height: calc(100vh - 50px); /* Stretch to 10px from bottom of screen, 40px from top */
-  margin: 40px auto 10px auto; /* Adjust bottom margin to 10px */
+  height: calc(100vh - 80px); /* Reduced height to account for bottom margin */
+  margin: 40px auto 40px auto; /* Increased bottom margin to 40px for mobile Safari */
   display: flex;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   box-sizing: border-box;
@@ -655,11 +655,11 @@ body {
   
   .app-container {
     width: calc(100% - 20px);
-    height: calc(100vh - 60px); /* Allow space at top and bottom */
-    max-height: calc(100vh - 60px);
+    height: calc(100vh - 90px); /* Increased space at bottom */
+    max-height: calc(100vh - 90px);
     margin: 10px;
     margin-top: 40px; /* Space for header */
-    margin-bottom: 10px; /* Reduced bottom margin */
+    margin-bottom: 40px; /* Increased bottom margin for mobile Safari */
     position: relative;
     overflow: hidden; /* Prevent overflow issues */
     box-sizing: border-box;
@@ -877,10 +877,10 @@ body {
   }
 
   .app-container {
-    margin: 0 !important; /* Remove all margins */
+    margin: 0 0 40px 0 !important; /* Keep bottom margin for Safari controls */
     padding: 0 !important;
-    height: 100vh !important; /* Full viewport height */
-    max-height: 100vh !important;
+    height: calc(100vh - 40px) !important; /* Account for bottom margin */
+    max-height: calc(100vh - 40px) !important;
     width: 100% !important; /* Full width */
     max-width: 100% !important;
     border-radius: 0 !important;
@@ -890,7 +890,7 @@ body {
   
   .panel, .panel-border {
     border-radius: 0 !important; /* Remove border radius on full screen */
-    height: 100vh !important;
+    height: calc(100vh - 40px) !important; /* Match app-container height */
     box-shadow: none !important; /* Remove shadow for full screen */
     border: none !important; /* Remove border for full screen */
   }
