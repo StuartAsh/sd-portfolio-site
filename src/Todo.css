@@ -80,8 +80,8 @@ body {
 .app-container {
   width: calc(100% - 40px);
   max-width: 1280px;
-  height: calc(100vh - 100px); /* Reduced height to account for larger bottom margin */
-  margin: 40px auto 60px auto; /* Increased bottom margin to 60px for mobile Safari */
+  height: calc(100vh - 140px); /* Reduced height to account for top (40px) and bottom (100px) spacing */
+  margin: 40px auto 100px auto; /* Increased bottom margin to 100px */
   display: flex;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   box-sizing: border-box;
@@ -655,11 +655,11 @@ body {
   
   .app-container {
     width: calc(100% - 20px);
-    height: calc(100vh - 110px); /* Increased space at bottom further */
-    max-height: calc(100vh - 110px);
+    height: calc(100vh - 150px); /* Account for top (40px) and bottom (100px) spacing */
+    max-height: calc(100vh - 150px);
     margin: 10px;
     margin-top: 40px; /* Space for header */
-    margin-bottom: 60px; /* Increased bottom margin to 60px for mobile Safari */
+    margin-bottom: 100px; /* Increased bottom margin to 100px */
     position: relative;
     overflow: hidden; /* Prevent overflow issues */
     box-sizing: border-box;
@@ -877,10 +877,10 @@ body {
   }
 
   .app-container {
-    margin: 0 0 60px 0 !important; /* Increased bottom margin to 60px for Safari controls */
+    margin: 0 0 100px 0 !important; /* Increased bottom margin to 100px */
     padding: 0 !important;
-    height: calc(100vh - 60px) !important; /* Account for larger bottom margin */
-    max-height: calc(100vh - 60px) !important;
+    height: calc(100vh - 100px) !important; /* Account for bottom spacing */
+    max-height: calc(100vh - 100px) !important;
     width: 100% !important; /* Full width */
     max-width: 100% !important;
     border-radius: 0 !important;
@@ -890,7 +890,7 @@ body {
   
   .panel, .panel-border {
     border-radius: 0 !important; /* Remove border radius on full screen */
-    height: calc(100vh - 60px) !important; /* Match app-container height */
+    height: calc(100vh - 100px) !important; /* Match app-container height */
     box-shadow: none !important; /* Remove shadow for full screen */
     border: none !important; /* Remove border for full screen */
   }
